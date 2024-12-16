@@ -20,7 +20,7 @@ async def new_message(chat_id: int, message: str, reply_markup=None):
 
 @app.on_message(filters.new_chat_members)
 async def on_new_chat_members(client: Client, message: Message):
-    if (await client.get_me()).id in [user.id for user in message.new_chat_members]:
+    if app.id in [user.id for user in message.new_chat_members]:
         added_by = message.from_user.mention if message.from_user else "ᴜɴᴋɴᴏᴡɴ ᴜsᴇʀ"
         title = message.chat.title
         username = f"@{message.chat.username}"
@@ -41,7 +41,7 @@ async def on_new_chat_members(client: Client, message: Message):
 
 @app.on_message(filters.left_chat_member)
 async def on_left_chat_member(client: Client, message: Message):
-    if (await client.get_me()).id == message.left_chat_member.id:
+    if app.id == message.left_chat_member.id:
         remove_by = message.from_user.mention if message.from_user else "ᴜɴᴋɴᴏᴡɴ ᴜsᴇʀ"
         title = message.chat.title
         username = f"@{message.chat.username}"
